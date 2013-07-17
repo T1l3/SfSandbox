@@ -20,5 +20,8 @@
 # Composer
 /composer.phar
 
+# Bower
+/web/bower_components/
+
 .DS_Store
 *~

@@ -1,0 +1,5 @@
+tib_sf_sandbox_team:
+    resource: "@TibSfSandboxTeamBundle/Controller/"
+    type:     annotation
+    prefix:   /
+

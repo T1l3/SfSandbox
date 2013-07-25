@@ -5,15 +5,25 @@ namespace Tib\SfSandbox\TeamBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Tib\SfSandbox\TeamBundle\Entity\Team;
 
-class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface
+class LoadTeamData extends AbstractFixture implements ContainerAwareInterface, OrderedFixtureInterface
 {
+    private $container;
+
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
+        $faker = $this->getFaker();
 
         $datas = array(
             array('Team 1', 'team1', 'description', true),
@@ -25,12 +35,20 @@ class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface
             $team = new Team();
             $team->setName($data[0]);
             $team->setSlug($data[1]);
-            $team->setDescription($data[2]);
+            $team->setDescription($faker->text());
             $team->setIsActive($data[3]);
 
             $manager->persist($team);
         }
         $manager->flush();
+    }
+
+    /**
+     * @return \Faker\Generator
+     */
+    public function getFaker()
+    {
+        return $this->container->get('faker.generator');
     }
 
     /**

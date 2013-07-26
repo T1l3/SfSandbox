@@ -22,6 +22,11 @@ class Player
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Team", inversedBy="players")
+     **/
+    private $team;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
@@ -38,10 +43,9 @@ class Player
     /**
      * @var string
      *
-     * @ORM\Column(name="age", type="string", length=255)
+     * @ORM\Column(name="birthday", type="date")
      */
-    private $age;
-
+    private $birthday;
 
     /**
      * Get id
@@ -100,25 +104,48 @@ class Player
     }
 
     /**
-     * Set age
+     * Set birthday
      *
-     * @param string $age
+     * @param string $birthday
      * @return Player
      */
-    public function setAge($age)
+    public function setBirthday($birthday)
     {
-        $this->age = $age;
+        $this->birthday = $birthday;
 
         return $this;
     }
 
     /**
-     * Get age
+     * Get birthday
      *
      * @return string
      */
-    public function getAge()
+    public function getBirthday()
     {
-        return $this->age;
+        return $this->birthday;
+    }
+
+    /**
+     * Set team
+     *
+     * @param \Tib\SfSandbox\TeamBundle\Entity\Team $team
+     * @return Player
+     */
+    public function setTeam(\Tib\SfSandbox\TeamBundle\Entity\Team $team = null)
+    {
+        $this->team = $team;
+
+        return $this;
+    }
+
+    /**
+     * Get team
+     *
+     * @return \Tib\SfSandbox\TeamBundle\Entity\Team
+     */
+    public function getTeam()
+    {
+        return $this->team;
     }
 }

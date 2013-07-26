@@ -8,6 +8,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Tib\SfSandbox\TeamBundle\Entity\Team;
+use Tib\SfSandbox\TeamBundle\Entity\Player;
 
 class LoadTeamData extends AbstractFixture implements ContainerAwareInterface, OrderedFixtureInterface
 {
@@ -37,6 +38,15 @@ class LoadTeamData extends AbstractFixture implements ContainerAwareInterface, O
             $team->setSlug($data[1]);
             $team->setDescription($faker->text());
             $team->setIsActive($data[3]);
+
+            for ($i=0; $i < 10; $i++) {
+                $player = new Player();
+                $player->setFirstname($faker->firstName());
+                $player->setLastname($faker->lastName());
+                $player->setBirthday(new \Datetime($faker->date()));
+                $player->setTeam($team);
+                $manager->persist($player);
+            }
 
             $manager->persist($team);
         }

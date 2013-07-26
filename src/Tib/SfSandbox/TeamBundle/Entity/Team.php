@@ -22,6 +22,11 @@ class Team
     private $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="Player", mappedBy="team", cascade={"all"})
+     **/
+    private $players;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -49,6 +54,13 @@ class Team
      */
     private $isActive;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->players = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -150,5 +162,38 @@ class Team
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Add players
+     *
+     * @param \Tib\SfSandbox\TeamBundle\Entity\Player $players
+     * @return Team
+     */
+    public function addPlayer(\Tib\SfSandbox\TeamBundle\Entity\Player $players)
+    {
+        $this->players[] = $players;
+
+        return $this;
+    }
+
+    /**
+     * Remove players
+     *
+     * @param \Tib\SfSandbox\TeamBundle\Entity\Player $players
+     */
+    public function removePlayer(\Tib\SfSandbox\TeamBundle\Entity\Player $players)
+    {
+        $this->players->removeElement($players);
+    }
+
+    /**
+     * Get players
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPlayers()
+    {
+        return $this->players;
     }
 }

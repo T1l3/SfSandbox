@@ -1,7 +1,9 @@
 SfSandbox
 ========================
 
-A Symfony 2.3 app to test some bundles
+A Symfony 2.3 app to test the implementation of some good bundles :
+
+* BazingaFakerBundle https://github.com/willdurand/BazingaFakerBundle
 
 1) Installation
 ----------------------------------

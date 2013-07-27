@@ -16,4 +16,13 @@ class DefaultController extends Controller
     {
         return array();
     }
+
+    /**
+     * @Route("/admin/", name="admin")
+     * @Template()
+     */
+    public function adminAction()
+    {
+        return array();
+    }
 }

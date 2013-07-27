@@ -39,7 +39,7 @@ class LoadTeamData extends AbstractFixture implements ContainerAwareInterface, O
             $team->setDescription($faker->text());
             $team->setIsActive($data[3]);
 
-            for ($i=0; $i < 10; $i++) {
+            for ($i = 0; $i < 10; $i++) {
                 $player = new Player();
                 $player->setFirstname($faker->firstName());
                 $player->setLastname($faker->lastName());

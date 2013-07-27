@@ -1,3 +1,8 @@
+tib_sf_sandbox_core:
+    resource: "@TibSfSandboxCoreBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 tib_sf_sandbox_team:
     resource: "@TibSfSandboxTeamBundle/Controller/"
     type:     annotation
